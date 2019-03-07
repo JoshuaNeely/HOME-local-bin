@@ -1,1 +1,2 @@
-python -m SimpleHTTPServer 8080
+port=${1:-8080}
+python -m SimpleHTTPServer $((port))
