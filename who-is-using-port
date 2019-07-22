@@ -1,0 +1,2 @@
+PORT=$1
+sudo netstat -tulpn | grep $PORT | awk '{print $7}'
