@@ -1,2 +1,1 @@
-dconf load /org/gnome/terminal/ < ~/.gnome-terminal-settings.txt
-dconf load /org/gnome/settings-daemon/plugins/media-keys/ < ~/.gnome-keybindings.txt
+dconf load /org/gnome/ < ~/.gnome-preferences.txt

@@ -1,0 +1,26 @@
+#!/usr/bin/expect -f 
+
+set timeout -1
+
+set corp_username [exec pass adtran/username] 
+spawn sudo openconnect -u $corp_username --juniper vpn.adtran.com
+
+set local_username [exec pass local/username]
+expect "password for $local_username:"
+
+set local_password [exec pass local/password]
+send -- "$local_password\r"
+
+expect "password:"
+
+set corp_password [exec pass adtran/corp]
+send -- "$corp_password\r"
+
+expect "password#2:"
+
+set stoken_password [exec pass stoken/password]
+set stoken_pin [exec pass stoken/pin]
+set code [exec stoken --password $stoken_password --pin $stoken_pin]
+send -- "$code\r"
+
+interact

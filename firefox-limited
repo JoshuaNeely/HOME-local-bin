@@ -1,0 +1,25 @@
+#!/bin/bash
+
+set -eu
+
+declare -r SYSTEMD_DIR=$HOME/.config/systemd/user
+
+# 400% is 4 CPUs
+
+declare -r FIREFOX_SLICE=$(cat <<EOF
+[Slice]
+CPUQuota=400%
+MemoryMax=4G
+EOF
+)
+
+mkdir -p "$SYSTEMD_DIR"
+echo "$FIREFOX_SLICE" > "$SYSTEMD_DIR"/firefox
+
+
+# TO LAUNCH FIREFOX
+#
+# systemd-run --user --slice=firefox firefox
+
+systemd-run --user --slice=firefox firefox
+
