@@ -2,7 +2,7 @@
 
 set timeout -1
 
-set corp_username [exec pass adtran/username] 
+set corp_username [exec pass work/username]
 spawn sudo openconnect -u $corp_username --juniper vpn.adtran.com
 
 set local_username [exec pass local/username]
@@ -13,7 +13,7 @@ send -- "$local_password\r"
 
 expect "password:"
 
-set corp_password [exec pass adtran/corp]
+set corp_password [exec pass work/corp]
 send -- "$corp_password\r"
 
 expect "password#2:"
