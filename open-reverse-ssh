@@ -1,0 +1,23 @@
+#!/bin/bash
+
+HIDDEN_PORT_SSH=22
+HIDDEN_PORT_GUI=4200
+EXPOSED_PORT_SSH=8000
+EXPOSED_PORT_GUI=8001
+SERVER_USER=pi
+TIME_LIMIT=10
+DESTINATION=josh@joshuaneely.ddns.net # where we are opening the port to
+
+# -f runs this in the background
+# tunnel will stay alive for ${TIME_LIMIT} or for as long as sessions are connected
+# -R makes this connection a reverse ssh tunnel
+
+ssh -f \
+  -R ${EXPOSED_PORT_SSH}:localhost:${HIDDEN_PORT_SSH} \
+  -R ${EXPOSED_PORT_GUI}:localhost:${HIDDEN_PORT_GUI} \
+  ${DESTINATION} \
+  sleep ${TIME_LIMIT};
+
+
+# this is what you would run on the remote machine-
+# ssh ${SERVER_USER}@localhost:${EXPOSED_PORT}
